@@ -1,0 +1,18 @@
+#Inventory-Tracking-System CSS
+
+.bold {
+	font-weight: bold;	
+}
+
+.hide {
+	display: none;
+}
+
+.errormsg {
+	font-weight: bold;
+	color: red;
+}
+
+.its-activelink {
+	color: aqua !important;
+}
