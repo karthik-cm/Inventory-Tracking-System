@@ -70,29 +70,36 @@ $(document).ready(function(){
 	var selectedWarehouseDetailsArr = JSON.parse(JSON.stringify(${selectedWarehouseDetailsArr}));
 	
 	// Form Inventory items table
-	formItemsTableDetails(inventoryItemsDetailsArr, selectedWarehouseDetailsArr);
+	formInventoryItemsTableDetails(inventoryItemsDetailsArr, selectedWarehouseDetailsArr);
 });
 
 
-function formItemsTableDetails(inventoryItemsDetailsArr, selectedWarehouseDetailsArr){
+function formInventoryItemsTableDetails(inventoryItemsDetailsArr, selectedWarehouseDetailsArr){
 	var tbodyHtml = ''
 	
-	for(var i=0; i<inventoryItemsDetailsArr.length; i++){
-		var currItemsDetailsArr = inventoryItemsDetailsArr[i];
-		
-		tbodyHtml += 
-			'<tr id="item_'+(i+1)+'">'
-				+'<td id="itemid_'+i+'" class="hide">' +currItemsDetailsArr[0] +'</td>'
-				
-				+'<td>' +(i+1) +'</td>'
-				+'<td>' +selectedWarehouseDetailsArr[i] +'</td>'		
-				+'<td>' +currItemsDetailsArr[1] +'</td>'
-				+'<td>' +currItemsDetailsArr[2] +'</td>'
-				+'<td>' +currItemsDetailsArr[3] +'</td>'
-				+'<td>' +currItemsDetailsArr[4] +'</td>'
-				+'<td>' +currItemsDetailsArr[5] +'</td>'
-				+'<td><button type="button" class="btn btn-danger" style="" onclick="deleteInventoryItemDetails($(this))">Delete</button>' +'</td>'
-			+'</tr>';
+	if(inventoryItemsDetailsArr != null && inventoryItemsDetailsArr.length > 0){
+		for(var i=0; i<inventoryItemsDetailsArr.length; i++){
+			var currItemsDetailsArr = inventoryItemsDetailsArr[i];
+			
+			tbodyHtml += 
+				'<tr id="item_'+(i+1)+'">'
+					+'<td id="itemid_'+i+'" class="hide">' +currItemsDetailsArr[0] +'</td>'
+					
+					+'<td>' +(i+1) +'</td>'
+					+'<td>' +selectedWarehouseDetailsArr[i] +'</td>'		
+					+'<td>' +currItemsDetailsArr[1] +'</td>'
+					+'<td>' +currItemsDetailsArr[2] +'</td>'
+					+'<td>' +currItemsDetailsArr[3] +'</td>'
+					+'<td>' +currItemsDetailsArr[4] +'</td>'
+					+'<td>' +currItemsDetailsArr[5] +'</td>'
+					+'<td><button type="button" class="btn btn-danger" style="" onclick="deleteInventoryItemDetails($(this))">Delete</button>' +'</td>'
+				+'</tr>';
+		}
+	}
+	else{
+		tbodyHtml = '<tr>'
+			+'<td style="font-weight: bold; color: red; text-align: center;" colspan="9"> NO RECORDS FOUND </td>'
+		+'</tr>'
 	}
 	
 	$('tbody#items_tbody').html(tbodyHtml);

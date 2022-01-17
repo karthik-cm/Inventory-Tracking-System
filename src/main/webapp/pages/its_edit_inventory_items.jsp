@@ -68,10 +68,11 @@
 
 $(document).ready(function(){
 	var inventoryItemsDetailsArr = JSON.parse(JSON.stringify(${inventoryItemsDetailsArr}));
+	
 	var warehouseDetailsArr = JSON.parse(JSON.stringify(${warehouseDetailsArr}));
 	
 	// Form items table  
-	formItemsTableDetails(inventoryItemsDetailsArr, warehouseDetailsArr);
+	formInventoryItemsTableDetails(inventoryItemsDetailsArr, warehouseDetailsArr);
 	
 	var selectedWarehouseDetailsArr = JSON.parse(JSON.stringify(${selectedWarehouseDetailsArr}));
 	
@@ -82,26 +83,33 @@ $(document).ready(function(){
 });
 
 
-function formItemsTableDetails(inventoryItemsDetailsArr, warehouseDetailsArr){
+function formInventoryItemsTableDetails(inventoryItemsDetailsArr, warehouseDetailsArr){
 	var tbodyHtml = ''
 	
-	for(var i=0; i<inventoryItemsDetailsArr.length; i++){
-		var currItemsDetailsArr = inventoryItemsDetailsArr[i];
-		
-		tbodyHtml += 
-			'<tr id="item_'+(i+1)+'">'
-				+'<td class="hide"><input type="text" class="form-control" name="itemid" id="itemid" value="'+currItemsDetailsArr[0]+'" disabled />' +'</td>'
-				+'<td>' +(i+1) +'</td>'
-				+'<td>' +formWarehouseDropdown(warehouseDetailsArr) +'</td>'		
-				+'<td><input type="text" class="form-control" name="inventoryname" id="inventoryname" value="'+currItemsDetailsArr[1]+'" disabled /></td>'
-				+'<td><input type="number" min="1" class="form-control" name="quantity" id="quantity" value="'+currItemsDetailsArr[2]+'" disabled /></td>'
-				+'<td><input type="number" min="0.1" class="form-control" name="price" id="price" value="'+currItemsDetailsArr[3]+'" disabled /></td>'
-				+'<td><input type="number" min="1" class="form-control" name="lotno" id="lotno" value="'+currItemsDetailsArr[4]+'" disabled /></td>'
-				+'<td><input class="form-control" name="rcvddate" id="rcvddate" type="date" value="'+currItemsDetailsArr[5]+'" disabled /></td>'
-				
-				+'<td><button type="button" class="btn btn-info" style="" onclick="editFields($(this))">Edit</button>' +'</td>'
-				+'<td><button type="button" class="btn btn-primary" style="" onclick="updateItemDetails($(this))">Update</button>' +'</td>'
-			+'</tr>';
+	if(inventoryItemsDetailsArr != null && inventoryItemsDetailsArr.length > 0){
+		for(var i=0; i<inventoryItemsDetailsArr.length; i++){
+			var currItemsDetailsArr = inventoryItemsDetailsArr[i];
+			
+			tbodyHtml += 
+				'<tr id="item_'+(i+1)+'">'
+					+'<td class="hide"><input type="text" class="form-control" name="itemid" id="itemid" value="'+currItemsDetailsArr[0]+'" disabled />' +'</td>'
+					+'<td>' +(i+1) +'</td>'
+					+'<td>' +formWarehouseDropdown(warehouseDetailsArr) +'</td>'		
+					+'<td><input type="text" class="form-control" name="inventoryname" id="inventoryname" value="'+currItemsDetailsArr[1]+'" disabled /></td>'
+					+'<td><input type="number" min="1" class="form-control" name="quantity" id="quantity" value="'+currItemsDetailsArr[2]+'" disabled /></td>'
+					+'<td><input type="number" min="0.1" class="form-control" name="price" id="price" value="'+currItemsDetailsArr[3]+'" disabled /></td>'
+					+'<td><input type="number" min="1" class="form-control" name="lotno" id="lotno" value="'+currItemsDetailsArr[4]+'" disabled /></td>'
+					+'<td><input class="form-control" name="rcvddate" id="rcvddate" type="date" value="'+currItemsDetailsArr[5]+'" disabled /></td>'
+					
+					+'<td><button type="button" class="btn btn-info" style="" onclick="editFields($(this))">Edit</button>' +'</td>'
+					+'<td><button type="button" class="btn btn-primary" style="" onclick="updateItemDetails($(this))">Update</button>' +'</td>'
+				+'</tr>';
+		}
+	}
+	else{
+		tbodyHtml = '<tr>'
+			+'<td style="font-weight: bold; color: red; text-align: center;" colspan="9"> NO RECORDS FOUND </td>'
+		+'</tr>'
 	}
 	
 	$('tbody#items_tbody').html(tbodyHtml);

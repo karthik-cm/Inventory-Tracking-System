@@ -80,18 +80,25 @@ $(document).ready(function(){
 function formInventoryItemsTableDetails(inventoryItemsDetailsArr){
 	var tbodyHtml = ''
 	
-	for(var i=0; i<inventoryItemsDetailsArr.length; i++){
-		var currItemsDetailsArr = inventoryItemsDetailsArr[i];
-		
-		tbodyHtml += 
-			'<tr>'
-				tbodyHtml += '<td>' +(i+1) +'</td>'
+	if(inventoryItemsDetailsArr != null && inventoryItemsDetailsArr.length > 0){
+		for(var i=0; i<inventoryItemsDetailsArr.length; i++){
+			var currItemsDetailsArr = inventoryItemsDetailsArr[i];
 			
-				for(var j=0; j<currItemsDetailsArr.length; j++){
-					tbodyHtml += '<td>' +currItemsDetailsArr[j] +'</td>'
-				}
+			tbodyHtml += 
+				'<tr>'
+					tbodyHtml += '<td>' +(i+1) +'</td>'
 				
-			+'</tr>';
+					for(var j=0; j<currItemsDetailsArr.length; j++){
+						tbodyHtml += '<td>' +currItemsDetailsArr[j] +'</td>'
+					}
+					
+				+'</tr>';
+		}
+	}
+	else{
+		tbodyHtml = '<tr>'
+			+'<td style="font-weight: bold; color: red; text-align: center;" colspan="9"> NO RECORDS FOUND </td>'
+		+'</tr>'
 	}
 	
 	$('tbody#items_tbody').html(tbodyHtml);
